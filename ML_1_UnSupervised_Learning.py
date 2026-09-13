@@ -2,41 +2,36 @@
 """
 ML(Machine Learning)
 
-Supervised Learning (Denetimli Öğrenme= Feature + Label)
-Modelin hem giriş verileri(x)
-hem de bu verilere ait doğruları cevapları (Etiketleri[Label]: Y)
+UnSupervised Learning (Denetimsiz Öğrenme= Feature var ancak Label YOK)
+Bu öğrenmede Label Yoktur!!!
+
+Modelin giriş verilerinin(x) bulunduğu ancak bu verilere ait doğru cevapların etiketlerinin(Label) bulunmadığı ML öğrenme türüdür.
 
 Temel Yapı:
-    X(Features/Özellikler) --> MODEL --> y (Label/Etiketler)
+    X(Features/Özellikler) --> MODEL --> Gruplar / Desenler
 
-Örneğin:
-- E-Posta spam mı değil mi ?
-- Ev fiyatları ne kadar olur ?
-- Bu müşteriye borç beyaz eşya verilir mi ?
-
-Öğrenme türü olan LABEL vardır
-
-
-Supervised Learning de Label vardır.
-Model geçmişteki doğru cevapları öğrenir. Bu örnekte Label 0=Kaldı, 1=Geçti
-
-
+Model:
+- Benzer kayıtları gruplandırabilir.
+- Verideki gizli deseneleri bulabilir.
+- Müşteri segmentleri oluşturabilir
+- Anormal verileri tespit etmeye yardımcı olabilir.
 
 """
 
-
 """
-Bir öğrencinin:
-1-) Günlük çalışma saati
-2-) Derse katılım yüzdesi
-bu bilgilere bakarak sınavı geçip geçmeyeceğini tahmin edelim. 
+Bu Örnekte:
+Müşterilerin:
+1-) Yıllık gelir
+2-) Aylık harcama
+bu bilgilere bakarak müşterileri 3 gruba ayıracağız.
 
-Label:
-    0 : Kaldı
-    1 : Geçti
-    
+Ancak modele:
+Bu müşteri A grubundadır
+Bu müşteri B grubundadır gibi hiç bir dorğu cevap vermesin.
+
+
 Kullanılan algoritma:
-    Logistic Regression 
+    K-Means Clustering 
     
 
 Kurulum:
@@ -51,93 +46,65 @@ Kurulum:
 
 
 import numpy as np
-from sklearn.linear_model import LogisticRegression
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
 
 def main():
-    # x (Features)
-    # 1  --> Günlük çalışma saati
-    # 30 --> Derse katılım yüzdesi
+
+    #  x = Müşteri özelliği
+    #  [yıllık_gelir, aylık harcama]
+    #  DİKKKAATTTT: Burada y=LABEL yoktur
     x = np.array([
-        [1,30],
-        [2,40],
-        [2,50],
-        [3,55],
-        [4,60],
-        [5,65],
-        [6,75],
-        [7,85],
-        [8,90],
-        [9,95]
+        [20, 10],
+        [22, 12],
+        [25, 15],
+
+        [50, 45],
+        [52, 48],
+        [55, 50],
+
+        [85, 80],
+        [88, 85],
+        [90, 88],
     ])
 
-
-    # y(Label)
-    # 0 = Kaldı, 1 = Geçti
-
-    # NOT: Supervised Learning'in en önemli özelliği; x verileriyle birlikte y labellarının bulunmasıdır.
-
-    y = np.array([
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        1,
-        1
-    ])
-
-    print("*******  SUOERVISED LEARNING  *******")
-    print("\nx - Öğrenci Özellikleri(Features)")
+    print("=== UNSUPERVISED Learning ===")
+    print("\nMüşteri verileri:")
     print(x)
 
+# __________________________________________________________
 
-    print("\ny - Label(Etiketler)")
-    print(y)
+    # ÖLÇEKLEME
+    # StandardScaler, farklı büyüklükteki sayıları benzer ölçeğe getirir.
+    # K-Means uzaklık hesabı yaptığı için ölçekleme faydalıdır.
 
-    """
-    Model Oluşturma
-    LogisticRegression bir sınıflandırma algoritmasıdır.
-    Burada 2 tane sınıf vardır, bunlar 0 --> Kaldı , 1 --> Geçti
-    LogisticRegression, iki veya daha fazla sınıfın hangisine ait olduğunu tahmin etmek için kullanılan sınıfın algortmasıdır.
-    """
+    scaler = StandardScaler()
+    x_scaled = scaler.fit_transform(x)
 
-    model = LogisticRegression()
+# __________________________________________________________
 
-    # Modeli Eğitim
-    # Model hem özellikleri hem de doğru cevapları görsün
-    # Bu ilişkide çalışma saati + Katılım oranı --> Geçti/Kaldı
-    model.fit(x, y)
+    # K-Means Modeli
+    model = KMeans(
+        n_clusters = 3, # Kümeleme
+        random_state = 42, # Rastgele yapılan işlemlerin her çalışmada aynı sonucu vermesini sağlar
+        n_init = 10 # 10 farklı başlangıcı dene ve en iyisini seç
+    )
 
+    # Model hem öğrenir hem de veri için bir cluster numarasını üretir.
+    clusters = model.fit_predict(x_scaled)
 
-    # Instance
-    # Örnek: Öğrenci 6 Saat çalışıyor, Derse Katılım %80 olsun
+    print("\nMdelin oluşturduğu gruplar")
 
-    newStudent = np.array([[6, 80]])
+    for i, customer in enumerate(x):
+        income = customer[0]
+        spending = customer[1]
+        cluster = clusters[i]
 
-
-    # Tahmin
-    prediction = model.predict(newStudent)[0]
-
-
-    # Tahnim Olasılıkları
-    probabilities = model.predict_proba(newStudent)[0]
-
-    print("\nModel Tahmini: ", prediction)
-
-
-    # Conditional
-    if prediction == 1:
-        print("Sonuç: Öğrencinin GEÇMESİ bekleniyor")
-    else:
-        print("Sonuç: Öğrencinin KALMASI bekleniyor")
-
-
-    print("\nOlasılıklar")
-    print(f"Kalma Olasılığı: , %{probabilities[0] * 100:.2f}")
-    print(f"Geçme Olasılığı: , %{probabilities[1] * 100:.2f}")
+    print(
+        f"Müşteri {i + 1}: "
+        f"Gelir = {income}, Harcama = {spending}"
+        f"Cluster = {cluster}"
+    )
 
 
 if __name__ == '__main__':
