@@ -140,10 +140,6 @@ def main():
     print(f"Geçme Olasılığı: , %{probabilities[1] * 100:.2f}")
 
 
-    print("\nAğırlıkları: ", model.coef_)
-    print("\nBias: ", model.intercept_)
-
-
 if __name__ == '__main__':
     main()
 
