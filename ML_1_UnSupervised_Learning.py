@@ -93,7 +93,7 @@ def main():
     # Model hem öğrenir hem de veri için bir cluster numarasını üretir.
     clusters = model.fit_predict(x_scaled)
 
-    print("\nMdelin oluşturduğu gruplar")
+    print("\nModelin oluşturduğu gruplar")
 
     for i, customer in enumerate(x):
         income = customer[0]
@@ -102,7 +102,7 @@ def main():
 
     print(
         f"Müşteri {i + 1}: "
-        f"Gelir = {income}, Harcama = {spending}"
+        f"Gelir = {income}, Harcama = {spending} ",
         f"Cluster = {cluster}"
     )
 
