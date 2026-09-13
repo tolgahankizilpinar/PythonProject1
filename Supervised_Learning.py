@@ -41,6 +41,12 @@ Kullanılan algoritma:
 
 Kurulum:
     pip install numpy scikit-learn
+    python -c "import numpy; import sklearn; print('Kurulum başarılı')"
+    
+    python -m pip install -r requirements.txt
+    
+    -m → module
+    -c → command
 """
 
 
