@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82603ed1-84a4-4651-9f5c-6e489af5e46a" name="Changes" comment="email spam scv dosyası eklendi">
-      <change afterPath="$PROJECT_DIR$/email_spam.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eposta_spam.py" afterDir="false" />
+    <list default="true" id="82603ed1-84a4-4651-9f5c-6e489af5e46a" name="Changes" comment="Add README.md file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eposta_spam.py" beforeDir="false" afterPath="$PROJECT_DIR$/eposta_spam.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +38,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/ML_0_Supervised_Learning.py" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ML_1_UnSupervised_Learning.py" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/eposta_spam.py" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ornek_email_spam.csv" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/requirements.txt" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -193,7 +191,15 @@
       <option name="project" value="LOCAL" />
       <updated>1789487971369</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Add README.md file">
+      <option name="closed" value="true" />
+      <created>1789488711968</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1789488711968</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -202,6 +208,7 @@
     <MESSAGE value="Supervised_Learning" />
     <MESSAGE value="UnSupervised_Learning" />
     <MESSAGE value="email spam scv dosyası eklendi" />
-    <option name="LAST_COMMIT_MESSAGE" value="email spam scv dosyası eklendi" />
+    <MESSAGE value="Add README.md file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add README.md file" />
   </component>
 </project>
